@@ -23,6 +23,9 @@
   - View reimbursement requests of a specific employee.
   - View all employees.
 
+![image](https://user-images.githubusercontent.com/71181253/171935955-fb6660e9-5a14-40db-a95e-f37521753f2e.png)
+
+
 ## Technologies used:
  1. Java 1.8+
  2. Servlets
