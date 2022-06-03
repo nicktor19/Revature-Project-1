@@ -1,6 +1,7 @@
 package forms.managerforms;
 
 import Transactions.Transactions;
+import UsersDao.Users;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,15 +32,23 @@ public class SearchEmpTransactionsForm extends HttpServlet {
                 "   </form></div>");
 
         //print out results form sessions:
-        HttpSession session = req.getSession(true);
-        ArrayList<Transactions> trans = (ArrayList<Transactions>) session.getAttribute("Saved_Manager_Search");
+
+
+        try{
+            HttpSession session = req.getSession(true);
+            ArrayList<Transactions> trans = (ArrayList<Transactions>) session.getAttribute("Saved_Manager_Search");
+        }catch (NullPointerException e){
+            System.out.println("Error om search emp trasactions line 37" + e.getMessage());
+        }
+
         String error = (String) req.getSession().getAttribute("Error_Saved_Manager_Search");
         //new display
         out.println("<div id='searchResult'>" +
                 "<!-- top Search --><table id='transactionsForm' class=\"table table-striped table-hover\">" +
                 "<th>-</th>" +
-                "<th>Transaction #</th>" +
-                "<th>EmpDashboardServlet Email</th>" +
+                "<th>TID#</th>" +
+                "<th>Email</th>" +
+                "<th>Reimbursement Note</th>" +
                 "<th>Amount</th>" +
                 "<th>Status</th>" +
                 "<th>Created On</th>" +
@@ -53,7 +62,6 @@ public class SearchEmpTransactionsForm extends HttpServlet {
                 "</table></select><!-- bottom Search --></div>");
 
         System.out.println("inside transactions forms for search");
-        System.out.println(trans);
         out.println();
     }
 
@@ -69,33 +77,50 @@ public class SearchEmpTransactionsForm extends HttpServlet {
             session.setAttribute("Error_Saved_Manager_Search", null);
         }
 
+        HttpSession manager = req.getSession();//managers
+        Users account_manager = (Users) manager.getAttribute("account");//managers
+        String managerError = null;
+
+        ArrayList<Transactions> list;
         if (session.getAttribute("Saved_Manager_Search") != null) {
-            ArrayList<Transactions> list = (ArrayList<Transactions>) session.getAttribute("Saved_Manager_Search");
+            try{
+                list = (ArrayList<Transactions>) session.getAttribute("Saved_Manager_Search");
+            } catch (NullPointerException e) {
+                 list = null;
+            }
 
-            for (Transactions trans : list) {
-                if (!trans.getEmployeeEmail().equals(managerEmailReturn(req))) {
-                    out.println("<form action='gmaster' method='post'><tr>" +
-                            "<input type='hidden' name='manager_pending_approval' value='true'>" +
-                            "<input type='hidden' name='transID' value='" + trans.getTransactionID() + "'>" +
-                            "<td><input type='hidden' name='transactions' value='" + trans.getTransactionID() + "'></td>" +
-                            "<td>" + trans.getTransactionID() + "</td>" +
-                            "<td>" + trans.getEmployeeEmail() + "</td>" +
-                            "<td> $" + df.format(trans.getReimbursementAmount()) + "</td>" +
-                            "<td>" + trans.getStatus() + "</td>" +
-                            "<td>" + trans.getTimestamp() + "</td>");
+            if (list != null){
+                for (Transactions trans : list) {
+                    if (!trans.getEmployeeEmail().equals(managerEmailReturn(req)) && !trans.getEmployeeEmail().equals(account_manager.getEmail())) {
+                        out.println("<form action='gmaster' method='post'><tr>" +
+                                "<input type='hidden' name='manager_pending_approval' value='true'>" +
+                                "<input type='hidden' name='transID' value='" + trans.getTransactionID() + "'>" +
+                                "<td><input type='hidden' name='transactions' value='" + trans.getTransactionID() + "'></td>" +
+                                "<td>" + trans.getTransactionID() + "</td>" +
+                                "<td>" + trans.getEmployeeEmail() + "</td>" +
+                                "<td>" + trans.getProof() + "</td>" +
+                                "<td> $" + df.format(trans.getReimbursementAmount()) + "</td>" +
+                                "<td>" + trans.getStatus() + "</td>" +
+                                "<td>" + trans.getTimestamp() + "</td>");
 
-                    if (trans.getStatus().equals("Pending")) {
-                        out.println(
-                                "<td><input type='submit' name='submit_button_approval' value='Approve'></td>" +
-                                        "<td><input type='submit' name='submit_button_approval' value='Reject'></td>");
+                        if (trans.getStatus().equals("Pending")) {
+                            out.println(
+                                    "<td><input type='submit' name='submit_button_approval' value='Approve'></td>" +
+                                            "<td><input type='submit' name='submit_button_approval' value='Reject'></td>");
+                        } else {
+                            out.println("<td></td>" +
+                                    "<td></td>");
+                        }
+                        out.println("</tr></form>");
+                        trans = null;
+                        session.setAttribute("Saved_Manager_Search", null);
                     } else {
-                        out.println("<td></td>" +
-                                "<td></td>");
+                        managerError = "<div class='errors' id='JSEraser'><div class='center'>You are not allowed to see your own here transactions here.</div></div>";
                     }
-                    out.println("</tr></form>");
-                    trans = null;
-                    session.setAttribute("Saved_Manager_Search", null);
-                }
+                } if (managerError != null)
+                        out.println(managerError);
+            } else {
+                out.println("<div class='center'>No reimbursement request by this user.</div>");
             }
         }
     }

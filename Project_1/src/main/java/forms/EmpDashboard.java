@@ -18,6 +18,8 @@ public class EmpDashboard extends HttpServlet {
         System.out.println(account.toString());
 
         if (doType.equals("get")) {
+            //•View their information.
+            EmployeeInfoForm.employeeInfo(req, res);
             //Go Print out the employeeOption form
             //•Submit a reimbursement req.
             ReimbursementForm.Employee_Reimbursement_Form(req, res);
@@ -25,8 +27,6 @@ public class EmpDashboard extends HttpServlet {
             PendingReimbursementForm.pendingReimbursement(req, res);
             //•View their resolved reimbursement requests.
             ResolvedReimbursementForm.resolvedReimbursement(req, res);
-            //•View their information.
-            EmployeeInfoForm.employeeInfo(req, res);
             //•Update their information.
             EmployeeUpdateForm.UserUpdateForm(req, res);
 

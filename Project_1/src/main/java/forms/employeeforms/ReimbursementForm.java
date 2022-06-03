@@ -11,7 +11,7 @@ public class ReimbursementForm extends HttpServlet {
     public static void Employee_Reimbursement_Form(HttpServletRequest req, HttpServletResponse res) throws IOException {
         PrintWriter out = res.getWriter();
             out.println("<div onclick='Reimbursement()' class='widget'>\n" +
-                    "       <label>Submit Reimbursement Request</label>\n" +
+                    "       <label class='hover_tab_emp'>Submit Reimbursement Request</label>\n" +
                     "    </div>\n" +
                     "    <div id='EmployeeReimburseHidden' class='hiddenForm' hidden>\n" +
                     "       <form action='employeedashboard' method='post'>\n" +

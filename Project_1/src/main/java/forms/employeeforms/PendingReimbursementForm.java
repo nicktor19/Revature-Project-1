@@ -21,15 +21,15 @@ public class PendingReimbursementForm extends HttpServlet {
 
         DecimalFormat df = new DecimalFormat("###,###,###.00"); // format number
         out.println("<div onclick='pendingReimbursement()' class='widget'>\n" +
-                "       <label>Pending Reimbursement Request</label>\n" +
+                "       <label class='hover_tab_emp'>Pending Reimbursement Request</label>\n" +
                 "   </div>\n" +
                 "   <fieldset class='hiddenForm' id='PendingF' hidden>\n" +
                 "       <table class=\"table table-striped table-hover\">\n" +
                 "           <tr>\n" +
-                "               <th>Transaction ID</th>\n" +
+                "               <th>Trans ID#</th>\n" +
                 "               <th>Employee Email</th>\n" +
-                "               <th>Reimbursement Amount</th>\n" +
-                "               <th>Proof Presented</th>\n" +
+                "               <th>Amount</th>\n" +
+                "               <th>Reimbursement Note</th>\n" +
                 "               <th>Time Stamp</th>\n" +
                 "          </tr>");
 

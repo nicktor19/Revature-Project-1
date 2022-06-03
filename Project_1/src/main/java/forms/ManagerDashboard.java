@@ -25,12 +25,20 @@ public class ManagerDashboard extends HttpServlet {
         System.out.println(account.toString());
         PrintWriter out = res.getWriter();
         if (doType.equals("get")) {
+            //•View reimbursement requests of a specific employee. //post
+            out.println("<div id = \"ManagerFormContent\"><!--Top of ManagerForm--->");
+            out.println("<div onclick=\"SearchInformation()\" class=\"widget\" style=\"background-color: #1A2238; color: white\">\n" +
+                    "    <label class='hover_tab_manager'>Search Employee Reimbursement Requests</label>\n" +
+                    "</div>\n"+
+                    "<div class =\"hiddenForm\" id=\"SearchHidden\">");
+            SearchEmpTransactionsForm.searchEmployeeTransactions(req, res);
+            out.println("</div>");
+
             //reimbursement pending displayed.
             //•Approve/Deny pending reimbursement requests.
             //•View all pending requests of all employees.
-           out.println("<div id = \"ManagerFormContent\"><!--Top of ManagerForm--->" +
-                    "<div onclick=\"pendingReimbursement()\" class=\"widget\" style=\"background-color: #1A2238; color: white\">\n" +
-                    "    <label>Pending Reimbursement Request</label>\n" +
+           out.println("<div onclick=\"pendingReimbursement()\" class=\"widget\" style=\"background-color: #1A2238; color: white\">\n" +
+                    "    <label class='hover_tab_manager'>Pending Reimbursement Request</label>\n" +
                     "</div>\n"+
                     "<div class =\"hiddenForm\" id=\"PendingF\"");
             PendingReimbursementForm.pendingReimbursement(req, res);
@@ -39,29 +47,24 @@ public class ManagerDashboard extends HttpServlet {
             //•View all resolved requests of all employees.
             out.println("" +
                     "<div onclick=\"CompleteInformation()\" class=\"widget\" style=\"background-color: #1A2238; color: white\">\n" +
-                    "    <label>Resolved Reimbursement</label>\n" +
+                    "    <label class='hover_tab_manager'>Resolved Reimbursement</label>\n" +
                     "</div>\n"+
                     "<div class =\"hiddenForm\" id=\"CompleteHidden\">");
             ViewCompletedReimbursement.viewCompletedReimbursement(req, res);
             out.println("</div>");
 
-            //•View reimbursement requests of a specific employee. //post
-            out.println("" +
-                    "<div onclick=\"SearchInformation()\" class=\"widget\" style=\"background-color: #1A2238; color: white\">\n" +
-                    "    <label>Search Employee Reimbursement Requests</label>\n" +
-                    "</div>\n"+
-                    "<div class =\"hiddenForm\" id=\"SearchHidden\">");
-            SearchEmpTransactionsForm.searchEmployeeTransactions(req, res);
-            out.println("</div>");
-
             //view all employees
-            out.println("" +
-                    "<div onclick=\"ViewAllUsers()\" class=\"widget\" style=\"background-color: #1A2238; color: white\">\n" +
-                    "    <label>View All Users in the System</label>\n" +
+            out.println("<div onclick=\"ViewAllUsers()\" class=\"widget\" style=\"background-color: #1A2238; color: white\">\n" +
+                    "    <label class='hover_tab_manager'>View All Users in the System</label>\n" +
                     "</div>\n"+
                     "<div class =\"hiddenForm\" id=\"AllUserHidden\">");
             AllEmployeeList.allEmployeeListDisplay(req, res);
+            out.println("</div>");
+
             out.println("</div><!--Bottom of ManagerForm---></div>");
+
+
+
 
         } else if (doType.equals("post")) {
             //Brains of the form to submit the response.

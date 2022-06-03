@@ -26,7 +26,7 @@ public class EmployeeUpdateForm extends HttpServlet {
         Users currentUser = (Users) current.getAttribute("account");
 
             out.println("<div onclick=\"UpdateInformation()\" class='widget'>\n" +
-                    "    <label>Update Employee Information</label>\n" +
+                    "    <label class='hover_tab_emp'>Update Employee Information</label>\n" +
                     "</div>\n" +
                     "<fieldset class='center' id = \"UpdateHidden\" class = 'hiddenForm' hidden>\n" +
                     "    <form action='employeedashboard' method='post'>\n" +

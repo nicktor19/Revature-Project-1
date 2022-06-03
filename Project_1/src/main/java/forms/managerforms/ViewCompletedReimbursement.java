@@ -22,6 +22,7 @@ public class ViewCompletedReimbursement extends HttpServlet {
         out.println("<tr>" +
                 "       <th>Trans ID#</th>" +
                 "       <th>Employee Email</th>" +
+                "       <th>Reimbursement Note</th>" +
                 "       <th>Payout</th>" +
                 "       <th>Status</th>" +
                 "       <th>Deciding Manager</th>" +
@@ -34,6 +35,7 @@ public class ViewCompletedReimbursement extends HttpServlet {
                 out.println("<tr>" +
                         "       <td>" + trans.getTransactionID() + "</td>" +
                         "       <td>" + trans.getEmployeeEmail() + "</td>" +
+                        "       <td>" + trans.getProof() + "</td>" +
                         "       <td>$" + df.format(trans.getReimbursementAmount()) + "</td>" +
                         "       <td>" + trans.getStatus() + "</td>" +
                         "       <td>" + trans.getManagerEmail() + "</td>" +

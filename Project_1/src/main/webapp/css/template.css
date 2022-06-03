@@ -96,7 +96,7 @@ legend{
 .errors {
     color: red;
     font-style: italic;
-    font-weight: 100;
+    font-weight: 600;
     text-align: left;
 }
 
@@ -145,4 +145,12 @@ legend{
     position: relative;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+.hover_tab_emp:hover {
+    color:whitesmoke;
+}
+
+.hover_tab_manager:hover {
+    color:#FF6A3D;
 }

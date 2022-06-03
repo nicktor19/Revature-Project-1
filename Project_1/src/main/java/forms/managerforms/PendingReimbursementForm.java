@@ -24,9 +24,9 @@ public class PendingReimbursementForm extends HttpServlet {
                 "<table id='transactionsForm' class=\"table table-striped table-hover\">" +
                 "<th>-</th>" +
                 "<th>Transaction #</th>" +
-                "<th>EmpDashboardServlet Email</th>" +
+                "<th>Email</th>" +
+                "<th>Reimbursement Note</th>" +
                 "<th>Amount</th>" +
-                "<th>Status</th>" +
                 "<th>Created On</th>" +
                 "<th>Approve</th>" +
                 "<th>Reject</th>" +
@@ -55,8 +55,8 @@ public class PendingReimbursementForm extends HttpServlet {
                             "<td><input type='hidden' name='transactions' value='"+ trans.getTransactionID() +"'></td>" +
                             "<td>" + trans.getTransactionID() +"</td>" +
                             "<td>" + trans.getEmployeeEmail() +"</td>" +
+                            "<td>" + trans.getProof() +"</td>" +
                             "<td> $" + df.format(trans.getReimbursementAmount()) +"</td>" +
-                            "<td>" + trans.getStatus() +"</td>" +
                             "<td>" + trans.getTimestamp() +"</td>" +
                             "<td><input type='submit' name='submit_button_approval' value='Approve'></td>" +
                             "<td><input type='submit' name='submit_button_approval' value='Reject'></td>" +

@@ -18,7 +18,7 @@ public class ResolvedReimbursementForm extends HttpServlet {
         ArrayList<Transactions> trans = getResolved(req);
         out.println("" +
                 "<div onclick=\"ResolvedReimbursement()\" class=\"widget\" >\n" +
-                "    <label>Resolved Reimbursement Request</label>\n" +
+                "    <label class='hover_tab_emp'>Resolved Reimbursement Request</label>\n" +
                 "</div>\n" +
                 "<fieldset class='hiddenForm' id=\"ResolvedF\" hidden>\n" +
                 "       <table class=\"table table-striped table-hover\">\n" +

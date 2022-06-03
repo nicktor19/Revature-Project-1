@@ -16,7 +16,7 @@ public class EmployeeInfoForm extends HttpServlet {
         Users user = (Users) current.getAttribute("account");
 
         out.println("<div onclick='ViewInformation()' class='widget'>\n" +
-                "       <label>View Employee Information Request</label>\n" +
+                "       <label class='hover_tab_emp'>View Employee Information</label>\n" +
                 "   </div>\n" +
                 "   <div id='ViewInfo' class='hiddenForm' hidden>\n" +
                 "           <h4><small class='text-muted'>Employee ID:</small> "+user.getID()+"</h4>\n" +
