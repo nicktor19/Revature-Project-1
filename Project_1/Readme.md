@@ -23,7 +23,7 @@
   - View reimbursement requests of a specific employee.
   - View all employees.
 
-![image](https://user-images.githubusercontent.com/71181253/171935955-fb6660e9-5a14-40db-a95e-f37521753f2e.png)
+![image](https://user-images.githubusercontent.com/71181253/171939721-bd72c119-acdd-4161-ad41-ac7a5e1bf840.png)
 
 
 ## Technologies used:
