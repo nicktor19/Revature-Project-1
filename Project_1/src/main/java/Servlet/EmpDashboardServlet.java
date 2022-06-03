@@ -41,12 +41,14 @@ public class EmpDashboardServlet extends HttpServlet {
             out.println("<div class='success'>"+req.getSession().getAttribute("welcome")+"</div>"); //welcome message
 
             //print out success page
+            out.println("<div id='JSEraser'>");
             String s = (String) req.getSession().getAttribute("FormStatusWriter");
             if (s != null && !s.isEmpty()){
                 out.println(s); // print out
                 //delete the form success.
                 req.getSession().setAttribute("FormStatusWriter", null);
             }
+            out.println("</div>");
 
             //load page
             EmpDashboard.employeeFormsLayout("get", req, res);

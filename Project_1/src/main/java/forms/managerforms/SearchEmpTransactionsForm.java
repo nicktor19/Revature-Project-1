@@ -74,7 +74,7 @@ public class SearchEmpTransactionsForm extends HttpServlet {
 
             for (Transactions trans : list) {
                 if (!trans.getEmployeeEmail().equals(managerEmailReturn(req))) {
-                    out.println("<form action='gmaster' method='post' id='ajax2'><tr>" +
+                    out.println("<form action='gmaster' method='post'><tr>" +
                             "<input type='hidden' name='manager_pending_approval' value='true'>" +
                             "<input type='hidden' name='transID' value='" + trans.getTransactionID() + "'>" +
                             "<td><input type='hidden' name='transactions' value='" + trans.getTransactionID() + "'></td>" +
