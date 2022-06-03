@@ -19,11 +19,12 @@ public class EmployeeInfoForm extends HttpServlet {
                 "       <label class='hover_tab_emp'>View Employee Information</label>\n" +
                 "   </div>\n" +
                 "   <div id='ViewInfo' class='hiddenForm' hidden>\n" +
-                "           <h4><small class='text-muted'>Employee ID:</small> "+user.getID()+"</h4>\n" +
-                "           <h4><small class='text-muted'>Name:</small> "+user.getFirstName() + " " + user.getLastName() + "</h4>\n" +
-                "           <h4><small class='text-muted'>Email</small> "+user.getEmail()+"</h4>\n" +
-                "           <h4><small class='text-muted'>Account Type:</small> "+user.getAccountType()+"</h4>\n"+
-                "   </div>\n");
+                "           <table class = 'table'>"+
+                "           <tr><td><h4><small class='text-muted'>Employee ID:</small></td> <td class='h4'>"+user.getID()+"</h4></td><tr/>\n" +
+                "           <tr><td><h4><small class='text-muted'>Name:</small></td> <td class='h4'>"+user.getFirstName() + " " + user.getLastName() + "</h4></td><tr/>\n" +
+                "           <tr><td><h4><small class='text-muted'>Email</small></td> <td class='h4'>"+user.getEmail()+"</h4></td><tr/>\n" +
+                "           <tr><td><h4><small class='text-muted'>Account Type:</small></td> <td class='h4'>"+user.getAccountType()+"</h4></td><tr/>\n"+
+                "           </table></div>\n");
     }
 
 }
