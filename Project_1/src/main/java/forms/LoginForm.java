@@ -26,7 +26,9 @@ public class LoginForm extends HttpServlet {
 
         doType = doType.toLowerCase();
         if (doType.equals("get")) {
+            out.println("<div id='JSEraser'>");
             regSuccessMessage(req, res);
+            out.println("</div>");
 
             out.println("<fieldset>\n" +
                     "                <h1>Login</h1>\n" +
