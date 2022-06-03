@@ -26,12 +26,13 @@
 ## Technologies used:
  1. Java 1.8+
  2. Servlets
- 3. MySQL
- 4. HTML/CSS
- 5. JavaScript
- 6. BootStrap
- 7. Hibernate
- 8. Tomcat
+ 4. MySQL
+ 5. Hibernate
+ 6. Maven
+ 7. HTML/CSS
+ 8. JavaScript
+ 9. BootStrap
+ 10. Tomcat
 
 ## Contributors
   - ###### Connor Bullock
