@@ -68,7 +68,7 @@ public class RegisterForms extends HttpServlet {
                     "                <input type='text' name='lastname' maxlength='50' placeholder='Enter Last Name' value='' class=\"form-control\" required>\n" +
                     "            </div>\n" +
                     "            <div class=\"mb-3\">\n" +
-                    "                <label for='email' class=\"form-label\">Email: <b class= 'errors'>" + registerValidation("email", req, res) + "</b></label>\n" +
+                    "                <label for='email' class=\"form-label\">Email: <b class= 'errors' id='JSEraser'>" + registerValidation("email", req, res) + "</b></label>\n" +
                     "                <input type='email' name='email' maxlength='50' placeholder='Enter Email' value='' class=\"form-control\" required>\n" +
                     "            </div class=\"mb-3\">\n" +
                     "            <div>\n" +

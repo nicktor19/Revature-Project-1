@@ -65,7 +65,7 @@ public class LoginForm extends HttpServlet {
                     "                </form>\n" +
                     "                 </div>" +
                     "                </fieldset>");
-            out.println("<div class='errors'>" + loginAttempt(req, res) + "</div>");
+            out.println("<div class='errors' id='JSEraser'>" + loginAttempt(req, res) + "</div>");
         }
         if (flagCount > 0 || errorCount > 0) {
             errorCount = 0;
