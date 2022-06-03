@@ -5,7 +5,7 @@ All employees in the company can login and submit requests for reimbursement and
 Finance managers can log in and view all reimbursement requests and history for all employees in the company. 
 Finance managers are authorized to approve and deny requests for expense reimbursement.
 
-- Users can:
+# Users can:
   - Login.
   - View the manager home page.
   - Logout.
@@ -25,14 +25,14 @@ Finance managers are authorized to approve and deny requests for expense reimbur
   - View all employees.
 
 - Technologies used:
-  1. Java 1.8+
-  2. Servlets
-  3. MySQL
-  4. HTML/CSS
-  5. JavaScript
-  6. BootStrap
-  7. Hibernate
-  8. Tomcat
+ 1. Java 1.8+
+ 2. Servlets
+ 3. MySQL
+ 4. HTML/CSS
+ 5. JavaScript
+ 6. BootStrap
+ 7. Hibernate
+ 8. Tomcat
 
 ## Contributors
   - ###### Connor Bullock
