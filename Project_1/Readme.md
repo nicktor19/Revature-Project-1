@@ -2,7 +2,7 @@
 # Expense Reimbursement System - Enterprise
 ##### The Expense Reimbursement System will manage the process of reimbursing employees for expenses incurred while on company time.  All employees in the company can login and submit requests for reimbursement and view their past tickets and pending requests. Finance managers can log in and view all reimbursement requests and history for all employees in the company. Finance managers are authorized to approve and deny requests for expense reimbursement.
 
-##### Each user, has their own dashboards associated to their features.
+##### Each user, has their own dashboards associated to their features. While manager also has access to Employee dashboard aswell.
 
 ## Users can:
   - Login.
@@ -26,12 +26,13 @@
 ## Technologies used:
  1. Java 1.8+
  2. Servlets
- 3. MySQL
- 4. HTML/CSS
- 5. JavaScript
- 6. BootStrap
- 7. Hibernate
- 8. Tomcat
+ 4. MySQL
+ 5. Hibernate
+ 6. Maven
+ 7. HTML/CSS
+ 8. JavaScript
+ 9. BootStrap
+ 10. Tomcat
 
 ## Contributors
   - ###### Connor Bullock
