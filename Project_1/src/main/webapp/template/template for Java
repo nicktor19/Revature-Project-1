@@ -1,0 +1,20 @@
+        /* Begin of template */
+        req.getRequestDispatcher("template/top_template.html").include(req, res);
+
+        String cssTag ="<link rel='stylesheet' type='text/css' href='css/template.css'>";
+        out.println(cssTag);
+
+        req.getRequestDispatcher("template/nav_logout.html").include(req, res);
+
+        req.getRequestDispatcher("template/mid_template.html").include(req, res);
+
+/**
+ * page content start here
+ */
+        /*  Write your content here! */
+/**
+ * page content ends here
+ */
+
+        req.getRequestDispatcher("template/bottom_template.html").include(req, res);
+        /* End of template */

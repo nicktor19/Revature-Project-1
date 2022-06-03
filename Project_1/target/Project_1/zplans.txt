@@ -1,0 +1,19 @@
+https://designshack.net/articles/trends/best-website-color-schemes/
+number 6 on the site used color schemes
+#1A2238
+#9DAAF2
+#FF6A3D
+#F4DB7D
+
+--------------------------------------------------------------------
+
+We can use iframes to load external pages 
+or 
+use javascript to implement forms and processing....
+
+
+
+
+
+
+

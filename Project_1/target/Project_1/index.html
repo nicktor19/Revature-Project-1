@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/template.css">
+    <style>
+        iframe{
+            position: relative;
+            width: 100%;
+            height: 300px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <header>
+            Expense Reimbursement System
+        </header>
+    </article>
+    <article>
+        <nav><a href="">Login</a> | <a href="register">Register</a></nav>
+    </article>
+    <article id="maincontainer">
+        <main>
+            <fieldset class="center">
+                <legend>Login</legend>
+                <form action="login" method="post">
+                    <table class='center'>
+                        <tr>
+                            <td class="right"><label>Employee Email:</label></td>
+                            <td class="left"><input type="email" name="email" placeholder="Employee Email"></td>
+                        </tr>
+                        <tr>
+                            <td class="right"><label>Password:</label></td>
+                            <td class="left"><input type="password" name="password" maxlength="20" placeholder="Enter Password" value=""></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="submit" value="Login" ></td>
+                        </tr>
+                    </table>
+                </form>
+                </fieldset>
+        </main>
+    </article>
+    <div id="footerbgc">
+        <article>
+            <footer><i class="fa fa-copyright" aria-hidden="true">Project One<br>Created By: Connor Bullock & Nicholas Torres</i></footer>
+        </article>
+    </div>
+</body>
+</html>
