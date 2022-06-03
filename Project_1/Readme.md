@@ -1,34 +1,37 @@
 ## Project 1
-The of this project was to create an Expense Reimbursement webapp.
-This project utilizes Hibernate and servlets
-##User Stories
-#Mandatory Requirements
-An Employee can:
-*Login.  
-*View the employee homepage.  
-*Logout.  
-*Submit a reimbursement request.  
-*View their pending reimbursement requests.
-*View their resolved reimbursement requests.
-*View their information.
-*Update their information.
+#Expense Reimbursement System - Enterprise
+The Expense Reimbursement System will manage the process of reimbursing employees for expenses incurred while on company time. 
+All employees in the company can login and submit requests for reimbursement and view their past tickets and pending requests. 
+Finance managers can log in and view all reimbursement requests and history for all employees in the company. 
+Finance managers are authorized to approve and deny requests for expense reimbursement.
 
-#A Managercan:
+#Users can:
 *Login.
 *View the manager home page.
 *Logout.
-*Approve/Deny pending reimbursement requests.
-*View all pending requests of all employees.
-*View all resolved requests of all employees.
-*View reimbursement requests of a specific employee.
-*View all employees.
 
-#Optional Requirements
-An Employee can:
-•Upload an image of his/her receipt as part of the reimbursement request.
-•Receive an email when one of their reimbursement requests is resolved.
-•Reset their password.
+#Employee can:
+- Submit a reimbursement request.  
+- View their pending reimbursement requests.
+- View their resolved reimbursement requests.
+- Viewtheir information.
+- Update their information.
 
-#A Manager can:
-*View animage of the receipt of a reimbursement request.
-*Register an employee and send an email to that employee with his credentials. 
+#Manager can:
+- Approve/Deny pending reimbursement requests.
+- View all pending requests of all employees.
+- View all resolved requests of all employees.
+- View reimbursement requests of a specific employee.
+- View all employees.
+
+#Technologies used:
+1. Java 1.8+
+2. Servlets
+3. MySQL
+4. HTML/CSS
+5. JavaScript
+6. BootStrap
+7. Hibernate
+8. Tomcat
+
+
