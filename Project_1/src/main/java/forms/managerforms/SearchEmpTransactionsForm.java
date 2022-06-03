@@ -120,7 +120,7 @@ public class SearchEmpTransactionsForm extends HttpServlet {
                 } if (managerError != null)
                         out.println(managerError);
             } else {
-                out.println("<div class='center'>No reimbursement request by this user.</div>");
+                out.println("<div class='center' id ='JSEraser'>No reimbursement request by this user.</div>");
             }
         }
     }

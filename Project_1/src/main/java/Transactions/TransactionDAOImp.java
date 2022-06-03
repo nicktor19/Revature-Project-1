@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import java.util.*;
 
@@ -54,10 +55,16 @@ public class TransactionDAOImp {
         OpenConnect();
         String SQL = "SELECT * FROM transactions WHERE status='Pending'";
         Query Search = session.createSQLQuery(SQL).addEntity(Transactions.class);
-        List<Transactions> list = Search.getResultList();
-        if (!list.isEmpty()) {
-            session.close();
-            return (ArrayList<Transactions>) list;
+        try {
+            List<Transactions> list = Search.getResultList();
+            if (!list.isEmpty()) {
+                session.close();
+                return (ArrayList<Transactions>) list;
+            }
+        }catch (PersistenceException p){
+            System.out.println("Pending Transactions " + p);
+        }catch (NullPointerException e){
+            System.out.println("Pending Transactions" + e);
         }
         session.close();
         return null;
@@ -68,10 +75,17 @@ public class TransactionDAOImp {
         String SQL = "call FindTransByEmployeeEmail(:Email)";
         Query Search = session.createSQLQuery(SQL).addEntity(Transactions.class)
                 .setParameter("Email", EmpEmail);
-        List<Transactions> list = Search.getResultList();
-        if (!list.isEmpty()) {
-            session.close();
-            return (ArrayList<Transactions>) list;
+        try {
+            List<Transactions> list = Search.getResultList();
+            if (!list.isEmpty()) {
+                session.close();
+                return (ArrayList<Transactions>) list;
+            }
+        }
+        catch (PersistenceException p){
+            System.out.println("Search by Email" + p);
+        }catch (NullPointerException e){
+            System.out.println("Search by Email" + e);
         }
         session.close();
         return null;
@@ -83,10 +97,16 @@ public class TransactionDAOImp {
         Query Search = session.createSQLQuery(SQL).addEntity(Transactions.class)
                 .setParameter("Email", EmpEmail)
                 .setParameter("Type", Type);
-        List<Transactions> list = Search.getResultList();
-        if (!list.isEmpty()) {
-            session.close();
-            return (ArrayList<Transactions>) list;
+        try {
+            List<Transactions> list = Search.getResultList();
+            if (!list.isEmpty()) {
+                session.close();
+                return (ArrayList<Transactions>) list;
+            }
+        }catch (PersistenceException p){
+            System.out.println("Search by Email" + p);
+        }catch (NullPointerException e){
+            System.out.println("Search by Email" + e);
         }
         session.close();
         return null;
@@ -97,10 +117,16 @@ public class TransactionDAOImp {
         String SQL = "call FindTransByManagerEmail(:ManagerEmail)";
         Query search = session.createSQLQuery(SQL).addEntity(Transactions.class)
                 .setParameter("ManagerEmail", manager);
-        List<Transactions> list = search.getResultList();
-        if(!list.isEmpty()){
-            session.close();
-            return (ArrayList<Transactions>) list;
+        try {
+            List<Transactions> list = search.getResultList();
+            if (!list.isEmpty()) {
+                session.close();
+                return (ArrayList<Transactions>) list;
+            }
+        }catch (PersistenceException p){
+            System.out.println("Search by Email" + p);
+        }catch (NullPointerException e){
+            System.out.println("Search by Email" + e);
         }
         session.close();
         return null;
@@ -110,10 +136,16 @@ public class TransactionDAOImp {
         OpenConnect();
         String sql = "call GetTransactions()";
         Query get = session.createSQLQuery(sql).addEntity(Transactions.class);
-        List<Transactions> list = get.getResultList();
-        if (!list.isEmpty()){
-            session.close();
-            return (ArrayList<Transactions>) list;
+        try {
+            List<Transactions> list = get.getResultList();
+            if (!list.isEmpty()) {
+                session.close();
+                return (ArrayList<Transactions>) list;
+            }
+        }catch (PersistenceException p){
+            System.out.println("Search by Email" + p);
+        }catch (NullPointerException e){
+            System.out.println("Search by Email" + e);
         }
         session.close();
         return null;
@@ -125,12 +157,17 @@ public class TransactionDAOImp {
         Query get_notifed = session.createSQLQuery(sql).addEntity(Transactions.class)
                 .setParameter("Email", EmpEmail)
                 .setParameter("Notified", note);
-
-        List<Transactions> list = get_notifed.getResultList();
-        if (!list.isEmpty()){
-            session.close();
-            return (ArrayList<Transactions>) list;
-        }
+        try {
+            List<Transactions> list = get_notifed.getResultList();
+            if (!list.isEmpty()) {
+                session.close();
+                return (ArrayList<Transactions>) list;
+            }
+        }catch (PersistenceException p){
+            System.out.println("Search by Email" + p);
+        }catch (NullPointerException e){
+            System.out.println("Search by Email" + e);
+    }
         session.close();
         return null;
     }
@@ -153,10 +190,16 @@ public class TransactionDAOImp {
         OpenConnect();
         String SQL = "SELECT * FROM transactions WHERE status='Approved' OR status='Rejected'";
         Query Search = session.createSQLQuery(SQL).addEntity(Transactions.class);
-        List<Transactions> list = Search.getResultList();
-        if (!list.isEmpty()) {
-            session.close();
-            return (ArrayList<Transactions>) list;
+        try {
+            List<Transactions> list = Search.getResultList();
+            if (!list.isEmpty()) {
+                session.close();
+                return (ArrayList<Transactions>) list;
+            }
+        }catch (PersistenceException p){
+            System.out.println("Search by Email" + p);
+        }catch (NullPointerException e){
+            System.out.println("Search by Email" + e);
         }
         session.close();
         return null;

@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import java.sql.*;
 import java.util.*;
@@ -37,11 +38,16 @@ public class UserDAOImp {
         Query search = session.createSQLQuery(sql).addEntity(Users.class)
                 .setParameter("Email", Email)
                 .setParameter("Pass", password);
-
-        List<Users> login = search.getResultList();
-        if(!login.isEmpty()) {
-            session.close();
-            return login.get(0);
+        try {
+            List<Users> login = search.getResultList();
+            if (!login.isEmpty()) {
+                session.close();
+                return login.get(0);
+            }
+        }catch (PersistenceException p){
+            System.out.println("Search by Email" + p);
+        }catch (NullPointerException e){
+            System.out.println("Search by Email" + e);
         }
         session.close();
         return null;
@@ -52,11 +58,17 @@ public class UserDAOImp {
         String sql = "SELECT Email FROM users WHERE email = :email";
 
         Query search = session.createSQLQuery(sql).setParameter("email", email);
-        List<Users> list = search.getResultList();
-        if(!list.isEmpty()) {
-            //System.out.println(list.get(0));
-            session.close();
-            return true;
+        try {
+            List<Users> list = search.getResultList();
+            if (!list.isEmpty()) {
+                //System.out.println(list.get(0));
+                session.close();
+                return true;
+            }
+        }catch (PersistenceException p){
+            System.out.println("Search by Email" + p);
+        }catch (NullPointerException e){
+            System.out.println("Search by Email" + e);
         }
         System.out.println("Finished email check");
         session.close();
@@ -87,23 +99,34 @@ public class UserDAOImp {
         Query FLSearch = session.createSQLQuery(sql).addEntity(Users.class)
                 .setParameter("Search", employee);
         HashSet<Users> total = new HashSet<>();
-
-        ArrayList<Users> first = (ArrayList<Users>) FLSearch.getResultList();
-        if(!first.isEmpty()){;
-            for(Users fSet : first){
-                total.add(fSet);
+        try {
+            ArrayList<Users> first = (ArrayList<Users>) FLSearch.getResultList();
+            if (!first.isEmpty()) {
+                ;
+                for (Users fSet : first) {
+                    total.add(fSet);
+                }
             }
+        }catch (PersistenceException p){
+            System.out.println("Search by Email" + p);
+        }catch (NullPointerException e){
+            System.out.println("Search by Email" + e);
         }
 
         String sql2 = "call FindUsersByNameLastFirst(:Search)";
         Query LFSearch = session.createSQLQuery(sql2).addEntity(Users.class)
                 .setParameter("Search", employee);
-
-        ArrayList<Users> Last = (ArrayList<Users>) FLSearch.getResultList();
-        if(!Last.isEmpty()){
-            for(Users LSet : Last){
-                total.add(LSet);
+        try {
+            ArrayList<Users> Last = (ArrayList<Users>) FLSearch.getResultList();
+            if (!Last.isEmpty()) {
+                for (Users LSet : Last) {
+                    total.add(LSet);
+                }
             }
+        }catch (PersistenceException p){
+            System.out.println("Search by Email" + p);
+        }catch (NullPointerException e){
+            System.out.println("Search by Email" + e);
         }
 
         ArrayList<Users> result = new ArrayList<>();
@@ -156,10 +179,16 @@ public class UserDAOImp {
         Query getUsers = session.createSQLQuery(sql).addEntity(Users.class);
         //Note: After testing the query. I found you need to include password in the selection
         //or else the program would break
-        List<Users> userList = getUsers.getResultList();
-        if (!userList.isEmpty()){
-            session.close();
-            return (ArrayList<Users>) userList;
+        try {
+            List<Users> userList = getUsers.getResultList();
+            if (!userList.isEmpty()) {
+                session.close();
+                return (ArrayList<Users>) userList;
+            }
+        }catch (PersistenceException p){
+            System.out.println("Search by Email" + p);
+        }catch (NullPointerException e){
+            System.out.println("Search by Email" + e);
         }
         session.close();
         return null;
