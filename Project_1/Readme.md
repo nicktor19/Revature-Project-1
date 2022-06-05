@@ -34,8 +34,9 @@
  6. Maven
  7. HTML/CSS
  8. JavaScript
- 9. BootStrap
- 10. Tomcat
+ 9. Ajax
+ 10. BootStrap
+ 11. Tomcat
 
 ## Contributors
   - ###### Connor Bullock
