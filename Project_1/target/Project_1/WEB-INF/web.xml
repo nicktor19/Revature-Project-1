@@ -34,14 +34,24 @@
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
 
-  <!-- Dashboard (profile) page -->
+  <!-- Manager (profile) page -->
   <servlet>
-    <servlet-name>dashboard</servlet-name>
-    <servlet-class>Servlet.DashboardServlet</servlet-class>
+    <servlet-name>empDashboard</servlet-name>
+    <servlet-class>Servlet.EmpDashboardServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>dashboard</servlet-name>
-    <url-pattern>/dashboard</url-pattern>
+    <servlet-name>empDashboard</servlet-name>
+    <url-pattern>/employeedashboard</url-pattern>
+  </servlet-mapping>
+
+  <!-- Employee (profile) page -->
+  <servlet>
+    <servlet-name>managerDashboard</servlet-name>
+    <servlet-class>Servlet.ManagerDashboardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>managerDashboard</servlet-name>
+    <url-pattern>/gmaster</url-pattern>
   </servlet-mapping>
 
   <!-- logout page -->

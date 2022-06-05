@@ -4,6 +4,8 @@ import UsersDao.Users;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -15,68 +17,65 @@ import java.util.Enumeration;
  */
 public class RequestSessionManagementDAOImpl extends HttpServlet {
     //fields
-    ArrayList<String> list = new ArrayList<>();
-    Users account;
-    String loginWelcomeMessage;
-    String FormSuccess;
+    static Users account;
 
-    //constructors
-    public RequestSessionManagementDAOImpl(){}
-    public RequestSessionManagementDAOImpl(HttpServletRequest req) {
-        Enumeration<String> session = req.getSession(true).getAttributeNames();
 
-        while (session.hasMoreElements()) {
-            list.add(session.nextElement());
-        }
-        for (String i : list) {
-            switch (i) {
-                case "welcome":
-                    setLoginWelcomeMessage(i);
-                    break;
-                case "account":
-                    setAccount((Users) req.getSession().getAttribute(i));
-                    break;
-                case "FormStatusWriter":
-                    //setFormSuccess();
-                    break;
-
-            }
-        }
-
-    }
+//    //constructors
+//    public RequestSessionManagementDAOImpl(){}
+//    public RequestSessionManagementDAOImpl(HttpServletRequest req) {
+//        Enumeration<String> session = req.getSession(true).getAttributeNames();
+//
+//        while (session.hasMoreElements()) {
+//            list.add(session.nextElement());
+//        }
+//        for (String i : list) {
+//            switch (i) {
+//                case "welcome":
+//                    setLoginWelcomeMessage(i);
+//                    break;
+//                case "account":
+//                    setAccount((Users) req.getSession(true).getAttribute(i));
+//                    break;
+//                case "FormStatusWriter":
+//                    //setFormSuccess();
+//                    break;
+//
+//            }
+//        }
+//}
 
     //methods
-    public ArrayList<String> getList() {
-        return list;
+
+    public static Users getAccount() {
+        return RequestSessionManagementDAOImpl.account;
     }
 
-    private void setList(ArrayList<String> list) {
-        this.list = list;
+    private static void setAccount(Users account) {
+        RequestSessionManagementDAOImpl.account = account;
+    }
+    public static Users sessionStarterEmp(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        try{
+            setAccount((Users) req.getSession(true).getAttribute("account"));
+            Users a = RequestSessionManagementDAOImpl.getAccount();
+            if (a != null && (a.getAccountType().equals("Employee") || a.getAccountType().equals("Manager"))) {
+                return a;
+            }
+        } catch (NullPointerException e) {
+            res.sendRedirect("logout");
+        }
+        return null;
     }
 
-    public Users getAccount() {
-        return account;
-    }
-
-    private void setAccount(Users account) {
-        this.account = account;
-    }
-
-    public String getLoginWelcomeMessage() {
-        return loginWelcomeMessage;
-    }
-
-    private void setLoginWelcomeMessage(String loginWelcomeMessage) {
-        this.loginWelcomeMessage = loginWelcomeMessage;
-    }
-
-    public String getFormSuccess() {
-        return FormSuccess;
-    }
-    public void deletedSuccess() {
-        FormSuccess = null;
-    }
-    public void setFormSuccess(String formSuccess) {
-        FormSuccess = formSuccess;
+    public static Users sessionStarterMan(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        try{
+            setAccount((Users) req.getSession(true).getAttribute("account"));
+            Users a = RequestSessionManagementDAOImpl.getAccount();
+            if (a != null && a.getAccountType().equals("Manager")) {
+                return a;
+            }
+        } catch (NullPointerException e) {
+            res.sendRedirect("logout");
+        }
+        return null;
     }
 }

@@ -2,11 +2,13 @@ package Servlet;
 
 import UsersDao.Users;
 import forms.EmpDashboard;
+import sessionmanagementdaoimp.RequestSessionManagementDAOImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -16,56 +18,62 @@ public class EmpDashboardServlet extends HttpServlet {
         res.setContentType("text/html");
         PrintWriter out = res.getWriter();
 
-        Users account = (Users) req.getSession().getAttribute("account"); //get session
+        try{
+            Users account = RequestSessionManagementDAOImpl.sessionStarterEmp(req, res);
 
-        System.out.println("INSIDE DashboardServlet (GET) ");
 
-        req.getRequestDispatcher("template/top_template.html").include(req, res);
+            System.out.println("INSIDE DashboardServlet (GET) ");
 
-        String cssTag ="<link rel='stylesheet' type='text/css' href='css/template.css'>";
-        out.println(cssTag);
+            req.getRequestDispatcher("template/top_template.html").include(req, res);
 
-        //NAV
-        if (account.getAccountType().equals("Employee") || account.getAccountType().equals("Manager")) {
-            if (account.getAccountType().equals("Manager"))
-                out.println("<a href='gmaster' class=\"btn btn-primary active\" role=\"button\" data-bs-toggle=\"button\" aria-pressed=\"true\" style=\"background-color: #1A2238;\">Manager Dashbard</a>   ");
-            out.println("<a href='employeedashboard' class=\"btn btn-primary active\" role=\"button\" data-bs-toggle=\"button\" aria-pressed=\"true\" style=\"background-color: #1A2238;\">Employee Dashbard</a>   ");
-            out.println("<a href='logout' class=\"btn btn-primary active\" role=\"button\" data-bs-toggle=\"button\" aria-pressed=\"true\" style=\"background-color: #1A2238;\">Logout</a>   ");
-        }
-        req.getRequestDispatcher("template/mid_template.html").include(req, res);
+            String cssTag ="<link rel='stylesheet' type='text/css' href='css/template.css'>";
+            out.println(cssTag);
 
-/**
- * page content start here
- */
-        if (req.getSession().getAttribute("welcome") != null) {
-            out.println("<div class='success'>"+req.getSession().getAttribute("welcome")+"</div>"); //welcome message
-
-            //print out success page
-            out.println("<div id='JSEraser'>");
-            String s = (String) req.getSession().getAttribute("FormStatusWriter");
-            if (s != null && !s.isEmpty()){
-                out.println(s); // print out
-                //delete the form success.
-                req.getSession().setAttribute("FormStatusWriter", null);
+            //NAV
+            if (account.getAccountType().equals("Employee") || account.getAccountType().equals("Manager")) {
+                if (account.getAccountType().equals("Manager"))
+                    out.println("<a href='gmaster' class=\"btn btn-primary active\" role=\"button\" data-bs-toggle=\"button\" aria-pressed=\"true\" style=\"background-color: #1A2238;\">Manager Dashbard</a>   ");
+                out.println("<a href='employeedashboard' class=\"btn btn-primary active\" role=\"button\" data-bs-toggle=\"button\" aria-pressed=\"true\" style=\"background-color: #1A2238;\">Employee Dashbard</a>   ");
+                out.println("<a href='logout' class=\"btn btn-primary active\" role=\"button\" data-bs-toggle=\"button\" aria-pressed=\"true\" style=\"background-color: #1A2238;\">Logout</a>   ");
             }
-            out.println("</div>");
+            req.getRequestDispatcher("template/mid_template.html").include(req, res);
 
-            //load page
-            EmpDashboard.employeeFormsLayout("get", req, res);
+    /**
+     * page content start here
+     */
+            if (req.getSession().getAttribute("welcome") != null) {
+                out.println("<div class='success'>"+req.getSession().getAttribute("welcome")+"</div>"); //welcome message
 
-        } else {
-            res.sendRedirect("login");
+                //print out success page
+                out.println("<div id='JSEraser'>");
+                String s = (String) req.getSession().getAttribute("FormStatusWriter");
+                if (s != null && !s.isEmpty()){
+                    out.println(s); // print out
+                    //delete the form success.
+                    req.getSession().setAttribute("FormStatusWriter", null);
+                }
+                out.println("</div>");
+
+                //load page
+                EmpDashboard.employeeFormsLayout("get", req, res);
+
+            } else {
+                res.sendRedirect("logout");
+            }
+
+
+
+
+    /**
+     * page content ends here
+     */
+
+            req.getRequestDispatcher("template/bottom_template.html").include(req, res);
+            /* End of template */
+
+        } catch (NullPointerException e) {
+            res.sendRedirect("logout");
         }
-
-
-
-
-/**
- * page content ends here
- */
-
-        req.getRequestDispatcher("template/bottom_template.html").include(req, res);
-        /* End of template */
     }
 
 
@@ -74,51 +82,56 @@ public class EmpDashboardServlet extends HttpServlet {
         res.setContentType("text/html");
         PrintWriter out = res.getWriter();
 
-        Users account = (Users) req.getSession().getAttribute("account"); //get session
+        try{
+            Users account = RequestSessionManagementDAOImpl.sessionStarterEmp(req, res);
 
-        System.out.println("INSIDE DashboardServlet (POST)");
+            System.out.println("INSIDE DashboardServlet (POST)");
 
-        req.getRequestDispatcher("template/top_template.html").include(req, res);
+            req.getRequestDispatcher("template/top_template.html").include(req, res);
 
-        String cssTag ="<link rel='stylesheet' type='text/css' href='css/template.css'>";
-        out.println(cssTag);
+            String cssTag ="<link rel='stylesheet' type='text/css' href='css/template.css'>";
+            out.println(cssTag);
 
-        if (account.getAccountType().equals("Employee") || account.getAccountType().equals("Manager")) {
-            if (account.getAccountType().equals("Manager"))
-                out.println("<a href='gmaster'>Manager Dashbard</a>   ");
-            out.println("<a href='employeedashboard'>Employee Dashbard</a>   ");
-            out.println("<a href='logout'>Logout</a>   ");
-        }
-
-        req.getRequestDispatcher("template/mid_template.html").include(req, res);
-
-/**
- * page content start here
- */
-        if (req.getSession().getAttribute("welcome") != null) {
-            out.println("<div class='success'>"+req.getSession().getAttribute("welcome")+"</div>"); //welcome message
-
-            //print out success page
-            String s = (String) req.getSession().getAttribute("FormStatusWriter");
-            if (s != null && !s.isEmpty()){
-                out.println(s); // print out
-                //delete the form success.
-                req.getSession().setAttribute("FormStatusWriter", null);
+            if (account.getAccountType().equals("Employee") || account.getAccountType().equals("Manager")) {
+                if (account.getAccountType().equals("Manager"))
+                    out.println("<a href='gmaster'>Manager Dashbard</a>   ");
+                out.println("<a href='employeedashboard'>Employee Dashbard</a>   ");
+                out.println("<a href='logout'>Logout</a>   ");
             }
 
-            //load page
-            EmpDashboard.employeeFormsLayout("post", req, res);
+            req.getRequestDispatcher("template/mid_template.html").include(req, res);
 
-        } else {
-            res.sendRedirect("login");
+    /**
+     * page content start here
+     */
+            if (req.getSession().getAttribute("welcome") != null) {
+                out.println("<div class='success'>"+req.getSession().getAttribute("welcome")+"</div>"); //welcome message
+
+                //print out success page
+                String s = (String) req.getSession().getAttribute("FormStatusWriter");
+                if (s != null && !s.isEmpty()){
+                    out.println(s); // print out
+                    //delete the form success.
+                    req.getSession().setAttribute("FormStatusWriter", null);
+                }
+
+                //load page
+                EmpDashboard.employeeFormsLayout("post", req, res);
+
+            } else {
+                res.sendRedirect("login");
+            }
+
+    /**
+     * page content ends here
+     */
+
+            req.getRequestDispatcher("template/bottom_template.html").include(req, res);
+            /* End of template */
+            } catch (NullPointerException e) {
+            res.sendRedirect("logout");
         }
-
-/**
- * page content ends here
- */
-
-        req.getRequestDispatcher("template/bottom_template.html").include(req, res);
-        /* End of template */
     }
+
 
 }

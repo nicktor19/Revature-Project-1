@@ -1,13 +1,10 @@
 Transactions\Transactions.class
 forms\RegisterForms.class
 Servlet\LogoutServlet.class
-forms\LoginForm.class
-LoginAndRegister\Users.class
 Servlet\RegisterServlet.class
-Transactions\TransactionDAOImp.class
 forms\EmpDashboard.class
 Servlet\LoginServlet.class
-Servlet\DashboardServlet.class
 forms\ManagerDashboard.class
+forms\LoginForm.class
+Transactions\TransactionDAOImp.class
 Servlet\IndexServlet.class
-LoginAndRegister\UserDAOImp.class

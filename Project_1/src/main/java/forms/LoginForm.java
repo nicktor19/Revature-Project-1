@@ -31,40 +31,38 @@ public class LoginForm extends HttpServlet {
             out.println("</div>");
 
             out.println("<fieldset>\n" +
-                    "                <h1>Login</h1>\n" +
-                    "                <div class=\"FormContainer\">" +
-                    "                <form action=\"login\" method=\"post\" >\n" +
-                    "                    <div class=\"mb-3\" required>\n" +
-                    "                        <label class=\"form-label\">Employee Email</label>\n" +
-                    "                        <input type=\"email\" name=\"email\" placeholder=\"Employee Email\" class=\"form-control\" required>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"mb-3\">\n" +
-                    "                        <label class=\"form-label\">Password</label>\n" +
-                    "                        <input type=\"password\" name=\"password\" maxlength=\"20\" placeholder=\"Enter Password\" value=\"\" class=\"form-control\" required>\n" +
-                    "                    </div>\n" +
-                    "                    <input type=\"submit\" value=\"Login\" class=\"btn btn-primary\">\n" +
-                    "\n" +
-                    "                </form>\n" +
-                    "                </div>"+
-                    "                </fieldset>");
+                    "       <h1>Login</h1>\n" +
+                    "       <div class='FormContainer'>\n" +
+                    "           <form action='login' method='post'>\n" +
+                    "               <div class='mb-3' required>\n" +
+                    "                   <label class='form-label'>Employee Email</label>\n" +
+                    "                   <input type='email' name='email' placeholder='Employee Email' class='form-control' required>\n" +
+                    "               </div>\n" +
+                    "               <div class='mb-3'>\n" +
+                    "                   <label class='form-label'>Password</label>\n" +
+                    "                   <input type='password' name='password' maxlength='20' placeholder='Enter Password' value='' class='form-control' required>\n" +
+                    "               </div>\n" +
+                    "                    <input type='submit' value='Login' class='btn btn-primary'>\n" +
+                    "           </form>\n" +
+                    "       </div>\n"+
+                    "   </fieldset>");
         } else if (doType.equals("post")) {
-            out.println("<fieldset>" +
-                    " <h1>Login</h1>\n" +
-                    " <div class=\"FormContainer\">" +
-                    " <form action=\"login\" method=\"post\" >\n" +
-                    "          <div class=\"mb-3\" required>\n" +
-                    "                 <label class=\"form-label\">Employee Email: <b class= 'errors'>" + loginValidation("email", req, res) + "</b></label>\n" +
-                    "                 <input type=\"email\" name=\"email\" placeholder=\"Employee Email\" class=\"form-control\" required>\n" +
-                    "          </div>\n" +
-                    "          <div class=\"mb-3\" required>\n" +
-                    "               <label class=\"form-label\">Password: <b class='errors'>"+ loginValidation("password", req, res) +"</b></label>\n" +
-                    "               <input type=\"password\" name=\"password\" maxlength=\"20\" placeholder=\"Enter Password\" value=\"\" class=\"form-control\" required>\n" +
-                    "         </div>\n" +
-                    "                    <input type=\"submit\" value=\"Login\" class=\"btn btn-primary\">\n" +
-                    "\n" +
-                    "                </form>\n" +
-                    "                 </div>" +
-                    "                </fieldset>");
+            out.println("<fieldset>\n" +
+                    "       <h1>Login</h1>\n" +
+                    "       <div class='FormContainer'>\n" +
+                    "           <form action='login' method='post' >\n" +
+                    "               <div class='mb-3' required>\n" +
+                    "                   <label class='form-label'>Employee Email: <b class= 'errors'>" + loginValidation("email", req, res) + "</b></label>\n" +
+                    "                   <input type='email' name='email' placeholder='Employee Email' class='form-control' required>\n" +
+                    "               </div>\n" +
+                    "               <div class='mb-3' required>\n" +
+                    "                   <label class='form-label'>Password: <b class='errors'>"+ loginValidation("password", req, res) +"</b></label>\n" +
+                    "                   <input type='password' name='password' maxlength='20' placeholder='Enter Password' value='' class='form-control' required>\n" +
+                    "               </div>\n" +
+                    "                   <input type='submit' value='Login' class='btn btn-primary'>\n" +
+                    "           </form>\n" +
+                    "       </div>\n" +
+                    "   </fieldset>");
             out.println("<div class='errors' id='JSEraser'>" + loginAttempt(req, res) + "</div>");
         }
         if (flagCount > 0 || errorCount > 0) {

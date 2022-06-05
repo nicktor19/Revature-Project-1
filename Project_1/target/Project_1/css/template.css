@@ -17,12 +17,18 @@ article header{
 
 article nav{
     position: relative;
+    align-content: center;
     padding:10px;
     border-radius: 25px 25px 0px 0px;
     width: 100%;
-    height:25px;
+    height:60px;
     text-align: center;
     background-color: #FF6A3D;
+}
+article nav a{
+    position: relative;
+    width: 200px;
+    padding-bottom: 10px;
 }
 
 #maincontainer{
@@ -90,7 +96,7 @@ legend{
 .errors {
     color: red;
     font-style: italic;
-    font-weight: 100;
+    font-weight: 600;
     text-align: left;
 }
 
@@ -99,4 +105,52 @@ legend{
     font-weight: bold;
     font-size: 20px;
     text-align: left;
+}
+#transactionsForm{
+    border: 1px solid black;
+}
+.widget{
+    margin-top: 25px;
+    align-items : center;
+    text-align: center;
+    align-content: center;
+    font-size: 30px;
+    width: 100%;
+    height: 60px;
+    background-color: #FF6A3D;
+    padding: 10px;
+    border-radius: 15px;
+    padding: 10px;
+}
+.hiddenForm{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+    margin: 0px;
+    width: 100%;
+    min-height: 150px;
+    max-height: 400px;
+    overflow-y: scroll;
+    background-color: azure;
+    background-blend-mode: overlay;
+    box-shadow: 10px 20px rgba(128, 128, 128, 0.555);
+}
+.FormContainer{
+    width: 60%;
+}
+.FormContainer b{
+    font-weight: bold;
+}
+#searchBar{
+    position: relative;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.hover_tab_emp:hover {
+    color:whitesmoke;
+}
+
+.hover_tab_manager:hover {
+    color:#FF6A3D;
 }

@@ -15,20 +15,20 @@ An Employee can:
     Completed•Login.
     Completed•View the employee homepage.
     Completed•Logout.
-•Submit a reimbursement request.  
-•View their pending reimbursement requests.
-•View their resolved reimbursement requests.
-•View their information.
-•Update their information.
+    Completed•Submit a reimbursement request.
+    Completed•View their pending reimbursement requests.
+    Completed•View their resolved reimbursement requests.
+    Completed•View their information.
+    complete •Update their information.
 
 A Manager can:
     Completed •Login.
     Completed •View the manager home page.
     Completed •Logout.
-•Approve/Deny pending reimbursement requests.
-•View all pending requests of all employees.
-•View all resolved requests of all employees.
-•View reimbursement requests of a specific employee.
+    Completed•Approve/Deny pending reimbursement requests.
+    Completed•View all pending requests of all employees.
+    Completed•View all resolved requests of all employees.
+    Completed•View reimbursement requests of a specific employee.
 •View all employees.
 
 Optional Requirements
@@ -42,17 +42,17 @@ A Manager can:
 •Register an employee and send an email to that employee with his credentials. 
 
 Technologies
-•Java 1.8
-•Servlets
-•JDBC
-•SQL
+•Java 1.8 -used
+•Servlets -used
+•JDBC -used
+•SQL -used
+•HTML/CSS - used
+•Bootstrap - used
+•JavaScript -used
+•Tomcat -used
 •PL/SQL
-•HTML/CSS
-•Bootstrap
-•JavaScript
 •AJAX
 •JUnit
 •Java Mail
 •Log4jEnvironment
-•Tomcat
 •Postgres Database
