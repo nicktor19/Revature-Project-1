@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ManagerDashboard extends HttpServlet {
@@ -119,6 +120,30 @@ public class ManagerDashboard extends HttpServlet {
                     }
                 }
             }
+            if(req.getParameter("manager_employeeName_search") != null){
+                if(req.getParameter("manager_employeeName_search").equals("true") && account.getAccountType().equals("Manager")){
+                    System.out.println("inside manager dashboard post if statment | entered into manager_User_search POST");
+                    //store the results into session.
+                    String name_search = req.getParameter("search_name");
+                    if(!name_search.isEmpty()){
+                        ArrayList<Users> U_search = null;
+                        try {
+                            U_search = (ArrayList<Users>) UserDAOImp.FindUsers(name_search);
+
+                            if (U_search != null && U_search.size() > 0){
+                                req.getSession().setAttribute("saved_employee_search", U_search);
+                            }else {
+                                req.getSession().setAttribute("Error_saved_employee_search", "No Employee Found.");
+                                System.out.println(req.getSession().getAttribute("Error_saved_employee_search"));
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                res.sendRedirect("gmaster");
+            }
+
         }
     }
 }

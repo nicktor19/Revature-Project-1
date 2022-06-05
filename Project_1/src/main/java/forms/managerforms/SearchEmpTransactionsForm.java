@@ -24,7 +24,7 @@ public class SearchEmpTransactionsForm extends HttpServlet {
         //Create form : Search Employee data.
         //manager_employee_search == true
         //out.println("inside...");
-        out.println("<div id= 'searchBar'><form action='gmaster' method='post' id='ajax'>" +
+        out.println("<div id= 'searchBar'><form action='gmaster' method='post'>" +
                 "       <label for='search_email'>Search Employee Transactions: </label>" +
                 "       <input type='hidden' name='manager_employee_search' value='true'>" +
                 "       <input type='email' name='search_email' placeholder='Search transactions' alt='Enter Email of the employee' required>" +
@@ -43,8 +43,7 @@ public class SearchEmpTransactionsForm extends HttpServlet {
 
         String error = (String) req.getSession().getAttribute("Error_Saved_Manager_Search");
         //new display
-        out.println("<div id='searchResult'>" +
-                "<!-- top Search --><table id='transactionsForm' class=\"table table-striped table-hover\">" +
+        out.println("<table id='transactionsForm' class=\"table table-striped table-hover\">" +
                 "<th>-</th>" +
                 "<th>TID#</th>" +
                 "<th>Email</th>" +
@@ -59,7 +58,7 @@ public class SearchEmpTransactionsForm extends HttpServlet {
         gatherEmployeeTransactions(req, res);
 
         out.println(
-                "</table></select><!-- bottom Search --></div>");
+                "</table></select>");
 
         System.out.println("inside transactions forms for search");
         out.println();
@@ -72,7 +71,7 @@ public class SearchEmpTransactionsForm extends HttpServlet {
         HttpSession session = req.getSession(true);
         //print out error message in a div
         if (session.getAttribute("Error_Saved_Manager_Search") != null){
-            out.println("<div class='errors'>"+ session.getAttribute("Error_Saved_Manager_Search")+"</div>");
+            out.println("<div class='errors' id = \"JSEraser\">"+ session.getAttribute("Error_Saved_Manager_Search")+"</div>");
             //destory this session
             session.setAttribute("Error_Saved_Manager_Search", null);
         }

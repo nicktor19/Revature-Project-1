@@ -95,7 +95,7 @@ public class UserDAOImp {
 
     public static List<Users> FindUsers(String employee) throws SQLException{
         OpenConnect();
-        String sql = "call FindUsersByNameFirstLast(:Search)";
+        String sql = "SELECT * FROM users where concat(FirstName,\" \", LastName) LIKE concat(\"%\",:Search,\"%\");\n";
         Query FLSearch = session.createSQLQuery(sql).addEntity(Users.class)
                 .setParameter("Search", employee);
         HashSet<Users> total = new HashSet<>();
@@ -113,7 +113,7 @@ public class UserDAOImp {
             System.out.println("Search by Email" + e);
         }
 
-        String sql2 = "call FindUsersByNameLastFirst(:Search)";
+        String sql2 = "SELECT * FROM users where concat(LastName,\" \", FirstName) LIKE concat(\"%\",:Search,\"%\");\n";
         Query LFSearch = session.createSQLQuery(sql2).addEntity(Users.class)
                 .setParameter("Search", employee);
         try {

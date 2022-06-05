@@ -27,6 +27,8 @@ public class ResolvedReimbursementForm extends HttpServlet {
                 "               <th>Employee Email</th>"+
                 "               <th>Reimbursement Amount</th>"+
                 "               <th>Proof Presented</th>"+
+                "               <th>Reimbursement Status</th>"+
+                "               <th>Reimbursement Handled By</th>"+
                 "               <th>Time Stamp</th>"+
                 "         </tr>");
         try {
