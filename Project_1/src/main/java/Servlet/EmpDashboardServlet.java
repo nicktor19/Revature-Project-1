@@ -21,6 +21,7 @@ public class EmpDashboardServlet extends HttpServlet {
         try{
             Users account = RequestSessionManagementDAOImpl.sessionStarterEmp(req, res);
 
+            new RequestSessionManagementDAOImpl(req);
 
             System.out.println("INSIDE DashboardServlet (GET) ");
 
@@ -42,7 +43,7 @@ public class EmpDashboardServlet extends HttpServlet {
      * page content start here
      */
             if (req.getSession().getAttribute("welcome") != null) {
-                out.println("<div class='success'>"+req.getSession().getAttribute("welcome")+"</div>"); //welcome message
+                out.println(RequestSessionManagementDAOImpl.getWelcome()); //welcome message
 
                 //print out success page
                 out.println("<div id='JSEraser'>");
@@ -85,6 +86,8 @@ public class EmpDashboardServlet extends HttpServlet {
         try{
             Users account = RequestSessionManagementDAOImpl.sessionStarterEmp(req, res);
 
+            new RequestSessionManagementDAOImpl(req);
+
             System.out.println("INSIDE DashboardServlet (POST)");
 
             req.getRequestDispatcher("template/top_template.html").include(req, res);
@@ -105,14 +108,13 @@ public class EmpDashboardServlet extends HttpServlet {
      * page content start here
      */
             if (req.getSession().getAttribute("welcome") != null) {
-                out.println("<div class='success'>"+req.getSession().getAttribute("welcome")+"</div>"); //welcome message
+                out.println(RequestSessionManagementDAOImpl.getWelcome()); //welcome message
 
                 //print out success page
-                String s = (String) req.getSession().getAttribute("FormStatusWriter");
-                if (s != null && !s.isEmpty()){
-                    out.println(s); // print out
+                if (RequestSessionManagementDAOImpl.getStatusFormWriter() != null && !RequestSessionManagementDAOImpl.getStatusFormWriter().isEmpty()){
+                    out.println(RequestSessionManagementDAOImpl.getStatusFormWriter()); // print out
                     //delete the form success.
-                    req.getSession().setAttribute("FormStatusWriter", null);
+                    RequestSessionManagementDAOImpl.setStatusFormWriter(null);
                 }
 
                 //load page

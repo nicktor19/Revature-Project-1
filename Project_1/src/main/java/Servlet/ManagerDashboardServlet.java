@@ -38,7 +38,8 @@ public class ManagerDashboardServlet extends HttpServlet {
             /**
              * page content start here
              */
-            out.println("<div class='success'>" + req.getSession().getAttribute("welcome") + "</div>"); //welcome message
+            new RequestSessionManagementDAOImpl(req);
+            out.println(RequestSessionManagementDAOImpl.getWelcome()); //welcome message
 
             ManagerDashboard.managerFormsLayout("get", req, res);
 

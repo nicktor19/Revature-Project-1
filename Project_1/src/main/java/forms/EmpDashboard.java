@@ -35,7 +35,7 @@ public class EmpDashboard extends HttpServlet {
             //get the form and complete the transactions
             if(req.getParameter("Reimbursement_Request") != null)
                 if (RequestFormManagementDaoImp.preformReimbursementForm(req, res, account)){
-                    employee.setAttribute("FormStatusWriter", "<div class='success'>Your reimbursement has been submitted successfully</div>");
+                    employee.setAttribute("FormStatusWriter", "<div class='success' >Your reimbursement has been submitted successfully</div>");
                     res.sendRedirect("employeedashboard");
                 } else {
                     employee.setAttribute("FormStatusWriter", "<div class='errors'>Your reimbursement has been submitted successfully</div>");
@@ -48,11 +48,9 @@ public class EmpDashboard extends HttpServlet {
                     employee.setAttribute("FormStatusWriter", "<div class='success'>Your account details were updated</div>");
                     res.sendRedirect("employeedashboard");
                 } else {
-                    employee.setAttribute("FormStatusWriter", "<div class='success'>Your account couldn't be updated please try again.</div>");
+                    employee.setAttribute("FormStatusWriter", "<div class='errors'>Your account couldn't be updated please try again.</div>");
                     res.sendRedirect("employeedashboard");
                 }
-
-
 
         }
     }
