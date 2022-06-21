@@ -1,0 +1,187 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ChangeTransactionStatus`(IN tID integer, IN MEmail char(50), IN stat ENUM('Approved', 'Rejected'))
+BEGIN
+IF EXISTS (SELECT * FROM transactions where TransactionID <=> tID AND employeeEmail != MEmail)
+    THEN
+        UPDATE transactions SET managerEmail = MEmail WHERE TransactionID = tID;
+        UPDATE transactions SET status = stat WHERE TransactionID = tID;
+    END IF;
+    
+END
+
+----
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_manager`()
+BEGIN
+	insert into users (Email, FirstName, LastName, accountType, passcode) VALUES ('admin@gmail.com', 'Admin', 'System', 'Manager', sha2('admin',224));
+END
+
+----
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FindTransByEmployeeEmail`(IN Email char(50))
+BEGIN
+	IF EXISTS (SELECT * FROM transactions where employeeEmail LIKE concat("%",Email,"%"))
+    then
+		SELECT * FROM transactions where employeeEmail LIKE concat("%",Email,"%");
+	end if;
+    
+END
+
+----
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FindTransByManagerEmail`(IN Email char(50))
+BEGIN
+    IF EXISTS (SELECT * FROM transactions where managerEmail LIKE concat("%",Email,"%"))
+    then
+        SELECT * FROM transactions where managerEmail LIKE concat("%",Email,"%");
+        end if;
+    
+END
+
+----
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FindUsersByEmail`(IN em char(50))
+BEGIN
+    IF EXISTS(SELECT id,LastName,FirstName,Email,accountType FROM users WHERE email LIKE concat("%",em,"%"))
+    then
+        SELECT id,LastName,FirstName,Email,accountType FROM users WHERE email LIKE concat("%",em,"%");
+	end if;
+END
+
+----
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FindUsersByName`(IN EName char(50))
+BEGIN
+    IF EXISTS (SELECT id,LastName,FirstName,Email,accountType FROM users where concat(LastName," ", FirstName) LIKE concat("%",EName,"%"))
+	then
+        SELECT id,LastName,FirstName,Email,accountType FROM users where concat(LastName," ", FirstName) LIKE concat("%", EName,"%");
+	ELSE IF EXISTS (SELECT id,LastName,FirstName,Email,accountType FROM users where concat(FirstName," ",LastName) LIKE concat("%",EName,"%"))
+	then
+        SELECT id,LastName,FirstName,Email,accountType FROM users where concat(FirstName," ",LastName) LIKE concat("%", EName,"%");
+    end if;
+    end if;
+END
+
+----
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetTransactions`()
+BEGIN
+		SELECT * FROM transactions;
+END
+
+----
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetUserNotifyTransactions`(IN UEmail char(50), IN note ENUM('Not Notified', 'Notified'))
+BEGIN
+    
+SELECT * FROM transactions where employeeEmail = UEmail AND notify = note AND status != "PENDING";
+
+    
+END
+
+----
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetUserTransactions`(IN UEmail char(50))
+BEGIN
+	IF EXISTS (SELECT * FROM transactions where employeeEmail = UEmail)
+    then
+		SELECT * FROM transactions where employeeEmail = UEmail;
+        end if;
+    
+END
+
+----
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetUserTypeTransactions`(IN UEmail char(50), IN stat ENUM('Pending', 'Approved', 'Rejected'))
+BEGIN
+        SELECT * FROM transactions where employeeEmail = UEmail AND status = stat;
+    
+END
+
+----
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Login`(IN em char(50), IN pass varchar(200))
+BEGIN
+
+    SELECT * FROM users WHERE Email=em AND passcode=SHA2(pass,224);
+
+END
+
+---
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Register`(IN lastN char(50), IN firstN char(50) , IN em char(50), IN pass varchar(200), In accountTyp enum('Employee', 'Manager'))
+BEGIN
+    Insert into users (LastName, FirstName, Email, passcode, accountType) VALUES (lastN, firstN, em, sha2(pass,224), accountTyp);
+END
+
+---
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RegisterForSite`(IN lastN char(50), IN firstN char(50) , IN em char(50), IN pass varchar(200))
+BEGIN
+Insert into users (LastName, FirstName, Email, passcode, accountType) VALUES (lastN, firstN, 
+em, sha2(pass,224), 'Employee');
+END
+
+---
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RegisterForSite`(IN lastN char(50), IN firstN char(50) , IN em char(50), IN pass varchar(200))
+BEGIN
+Insert into users (LastName, FirstName, Email, passcode, accountType) VALUES (lastN, firstN, 
+em, sha2(pass,224), 'Employee');
+END
+
+---
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Reimbursement`(IN employee char(50), IN reimbursement double, IN reciept char(100))
+BEGIN
+IF EXISTS(SELECT * FROM users WHERE Email = employee)
+Then
+    IF(reciept IS NOT NULL AND reimbursement > 0)
+        then
+        INSERT INTO transactions (employeeEmail, reimbursementAmount, proof, status, notify, timestamp) VALUES (employee, reimbursement, reciept, "Pending", "Not Notified", now());
+    ELSE
+        INSERT INTO transactions (employeeEmail, reimbursementAmount, status, notify, timestamp) VALUES (employee, reimbursement, "Pending", "Not Notified", now());
+End IF;
+End IF;
+END
+
+---
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CreateTables_AND_Set_User_Key`()
+BEGIN
+CREATE TABLE users (
+  id int NOT NULL AUTO_INCREMENT,
+  LastName char(50) NOT NULL,
+  FirstName char(50) NOT NULL,
+  Email char(50) NOT NULL,
+  passcode varchar(200) NOT NULL,
+  accountType enum('Employee','Manager') NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY Email (Email)
+);
+
+CREATE TABLE transactions (
+  transID int NOT NULL AUTO_INCREMENT,
+  employeeEmail char(50) NOT NULL,
+  reimbursementAmount double NOT NULL,
+  managerEmail char(50) DEFAULT NULL,
+  status enum('Pending','Approved','Rejected') NOT NULL,
+  time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  notify enum('Not Notified','Notified') NOT NULL,
+  proof char(100) DEFAULT NULL,
+  PRIMARY KEY (transID,time),
+  KEY FK_trans_email (employeeEmail),
+  KEY FK_trans_Manager (managerEmail),
+  CONSTRAINT FK_trans_email FOREIGN KEY (employeeEmail) REFERENCES users (Email),
+  CONSTRAINT FK_trans_Manager FOREIGN KEY (managerEmail) REFERENCES users (Email));
+END
+
+---
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UserAckTransactions`(IN UEmail char(50), IN tID integer)
+BEGIN
+    IF EXISTS (SELECT * FROM transactions where employeeEmail = UEmail AND TransactionID = tID AND status != "PENDING")
+    then
+        UPDATE transactions set notify = "Notified" Where TransactionID = tID;
+        end if;
+    
+END
